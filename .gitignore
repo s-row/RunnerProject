@@ -25,3 +25,4 @@
 *.unitypackage
 .vsconfig
 *.slnx
+.utmp/

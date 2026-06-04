@@ -23825,7 +23825,7 @@ MonoBehaviour:
   player: {fileID: 1224462695}
   playerRb: {fileID: 1224462690}
   pct: {fileID: 1224462698}
-  playerSpriterRenderer: {fileID: 1224462694}
+  playerSpriteRenderer: {fileID: 1224462694}
   speed: 3.5
   jump: 6
 --- !u!1 &500460185
@@ -24301,8 +24301,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 369589870}
-          m_TargetAssemblyTypeName: PlayerControll, Assembly-CSharp
-          m_MethodName: OnReleseMovebutton
+          m_TargetAssemblyTypeName: ControlManager, Assembly-CSharp
+          m_MethodName: OnReleaseMovebutton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -24643,8 +24643,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 369589870}
-          m_TargetAssemblyTypeName: PlayerControll, Assembly-CSharp
-          m_MethodName: OnReleseMovebutton
+          m_TargetAssemblyTypeName: ControlManager, Assembly-CSharp
+          m_MethodName: OnReleaseMovebutton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -26414,6 +26414,7 @@ GameObject:
   - component: {fileID: 1224462690}
   - component: {fileID: 1224462698}
   - component: {fileID: 1224462699}
+  - component: {fileID: 1224462700}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -26558,20 +26559,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerContorl
   isGrounded: 1
-  MaxHp: 4
-  currentHp: 0
-  keyCount: 0
-  invincibleTime: 2
-  damageInterval: 2
-  playerRb: {fileID: 1224462690}
-  animator: {fileID: 1224462692}
-  objectManager: {fileID: 1978081714}
-  uIManager: {fileID: 1631441671}
   groundCheck: {fileID: 1607155199}
   groundCheckRadius: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  objectManager: {fileID: 1978081714}
+  playerStatus: {fileID: 1224462700}
 --- !u!58 &1224462699
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26608,6 +26602,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.38281247
+--- !u!114 &1224462700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224462689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08b0110f08d07746be748f155191ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  MaxHp: 4
+  currentHp: 0
+  keyCount: 0
+  invincibleTime: 2
+  damageInterval: 2
+  uiManager: {fileID: 1631441671}
+  animator: {fileID: 1224462692}
 --- !u!1 &1284817551
 GameObject:
   m_ObjectHideFlags: 0

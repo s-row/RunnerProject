@@ -1,18 +1,11 @@
 using UnityEngine;
 
-enum PlayerState
-{
-    Move,
-    Stay,
-    Jump
-}
-
 public class ControlManager : MonoBehaviour
 {
     public Transform player;
     public Rigidbody2D playerRb;
-    public PlayerContorl pct;
-    public SpriteRenderer playerSpriterRenderer;
+    public PlayerControl pct;
+    public SpriteRenderer playerSpriteRenderer;
 
     public float speed = 1.5f;
     public float jump = 2;
@@ -29,24 +22,21 @@ public class ControlManager : MonoBehaviour
     }
     public void OnPressRightButton()
     {
-
         playerDefaultMove = 1;
-        playerSpriterRenderer.flipX = false;
+        playerSpriteRenderer.flipX = false;
 
     }
     
     public void OnPressLeftButton()
     {
-        
         playerDefaultMove = -1;
-        playerSpriterRenderer.flipX = true;
+        playerSpriteRenderer.flipX = true;
 
     }
 
-    public void OnReleseMovebutton()
+    public void OnReleaseMovebutton()
     {
         playerDefaultMove = 0;
-
     }
     public bool IsMoving()
     {

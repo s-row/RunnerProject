@@ -341,7 +341,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1942774651}
         m_TargetAssemblyTypeName: EndSceneManager, Assembly-CSharp
-        m_MethodName: GoMainScene
+        m_MethodName: RetryGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

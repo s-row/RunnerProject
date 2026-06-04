@@ -7,12 +7,12 @@ public class ObjectManager : MonoBehaviour
     public GameObject heartItemPrefab;
     
     // key 오브젝트 설정
-    public void HandleObject(PlayerContorl player, ObjectItem objectItem)
+    public void HandleObject(PlayerStatus playerStaus, ObjectItem objectItem)
     {
         switch (objectItem.objectType)
         {
             case ObjectType.Key:
-                HandleKey(player, objectItem);
+                HandleKey(playerStaus, objectItem);
                 break;
 
             case ObjectType.Goal:
@@ -27,24 +27,24 @@ public class ObjectManager : MonoBehaviour
         GameResultData.CalculateScore();
         SceneManager.LoadScene("EndScene");
     }
-    public void HandleCollisionObject(PlayerContorl player, ObjectItem objectItem)
+    public void HandleCollisionObject(PlayerStatus playerStatus, ObjectItem objectItem)
     {
         switch (objectItem.objectType)
         {
             case ObjectType.Block:
-                HandleBlock(player, objectItem);
+                HandleBlock(playerStatus, objectItem);
                 break;
         }
     }
-    private void HandleKey(PlayerContorl player, ObjectItem objectItem)
+    private void HandleKey(PlayerStatus playerStatus, ObjectItem objectItem)
     {
-        player.AddKey(1);
+        playerStatus.AddKey(1);
         Destroy(objectItem.gameObject);
     }
     // block 오브젝트 설정
-    private void HandleBlock(PlayerContorl player, ObjectItem objectItem)
+    private void HandleBlock(PlayerStatus playerStatus, ObjectItem objectItem)
     {
-        bool usedKey = player.UseKey(1);
+        bool usedKey = playerStatus.UseKey(1);
 
         if (usedKey == false)
         {
@@ -57,19 +57,19 @@ public class ObjectManager : MonoBehaviour
 
         if (heartItemPrefab != null)
         {
-            StartCoroutine(SpawnHeartAndHeal(player, spawnPosition));
+            StartCoroutine(SpawnHeartAndHeal(playerStatus, spawnPosition));
         }
         else
         {
-            player.Heal(1);
+            playerStatus.Heal(1);
         }
     }
 
-    private IEnumerator SpawnHeartAndHeal(PlayerContorl player, Vector3 spawnPosition)
+    private IEnumerator SpawnHeartAndHeal(PlayerStatus playerStatus, Vector3 spawnPosition)
     {
         GameObject heart = Instantiate(heartItemPrefab, spawnPosition, Quaternion.identity);
 
-        player.Heal(1);
+        playerStatus.Heal(1);
 
         yield return new WaitForSeconds(0.5f);
 

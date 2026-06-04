@@ -47,20 +47,20 @@ DB
 - 저장된 점수를 기반으로 랭킹 계산
 
 # 스크립트 구조
-PlayerControl.cs : 플레이어의 바닥 체크, 충돌 감지, 오브젝트 상호작용 처리
-PlayerStatus.cs : HP, 키 개수, 데미지, 회복, 무적 시간, 애니메이션 상태 관리
-ControlManager.cs : 모바일 버튼 입력, 이동, 점프, 좌우 반전 처리
-ObjectManager.cs : 열쇠, 블록, 하트, 골인 지점 처리
-ObjectItem.cs : 오브젝트 타입을 enum으로 구분
-MonsterMove.cs : 일반 몬스터와 개구리 몬스터 이동 처리
-MonsterSpawnManager.cs : 플레이어 위치에 따른 몬스터 스폰 처리
-UIManager.cs : 하트 UI와 키 개수 UI 갱신
-SupabaseManager.cs : Supabase 연결, 회원가입, 로그인, 점수 저장, 랭킹 조회
-LoginManager.cs : 로그인 화면 입력 검사 및 로그인 요청 처리
-SignUpManager.cs : 회원가입 화면 입력 검사 및 회원가입 요청 처리
-EndSceneManager.cs : 결과 화면 점수 표시, 점수 저장, 랭킹 표시
-CameraControl.cs : 플레이어 추적 및 카메라 이동 범위 제한
-SceneMoveManager.cs : 씬 이동 처리
+- PlayerControl.cs : 플레이어의 바닥 체크, 충돌 감지, 오브젝트 상호작용 처리
+- PlayerStatus.cs : HP, 키 개수, 데미지, 회복, 무적 시간, 애니메이션 상태 관리
+- ControlManager.cs : 모바일 버튼 입력, 이동, 점프, 좌우 반전 처리
+- ObjectManager.cs : 열쇠, 블록, 하트, 골인 지점 처리
+- ObjectItem.cs : 오브젝트 타입을 enum으로 구분
+- MonsterMove.cs : 일반 몬스터와 개구리 몬스터 이동 처리
+- MonsterSpawnManager.cs : 플레이어 위치에 따른 몬스터 스폰 처리
+- UIManager.cs : 하트 UI와 키 개수 UI 갱신
+- SupabaseManager.cs : Supabase 연결, 회원가입, 로그인, 점수 저장, 랭킹 조회
+- LoginManager.cs : 로그인 화면 입력 검사 및 로그인 요청 처리
+- SignUpManager.cs : 회원가입 화면 입력 검사 및 회원가입 요청 처리
+- EndSceneManager.cs : 결과 화면 점수 표시, 점수 저장, 랭킹 표시
+- CameraControl.cs : 플레이어 추적 및 카메라 이동 범위 제한
+- SceneMoveManager.cs : 씬 이동 처리
 
 # 구현하며 배운 점
 Unity 2D의 물리와 충돌처리의 중요성

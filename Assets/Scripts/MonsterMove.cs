@@ -1,21 +1,22 @@
 using UnityEngine;
 
+// 몬스터 이동 타입
 public enum MonsterType
 {
     Frog,
     Normal
 }
 
+// 몬스터 타입에 따라 일반 이동 또는 개구리 점프 이동을 처리
 public class MonsterMove : MonoBehaviour
 {
     public float speed = 2f;
     public float destroyDistance = 15f;
     public MonsterType monsterType;
-    
 
     [Header("Frog Monster")]
-    public float frogJumpPower = 3f;      // 개구리 점프 힘, 플레이어보다 낮게
-    public float frogJumpInterval = 1.2f;   // 몇초마다 점프하는지
+    public float frogJumpPower = 3f;
+    public float frogJumpInterval = 1.2f;
 
     private Rigidbody2D rb;
     private Transform player;
@@ -25,7 +26,6 @@ public class MonsterMove : MonoBehaviour
     private int moveDirection;
     private bool isGrounded = false;
     private float jumpTimer = 0f;
-    
 
     private void Awake()
     {
@@ -38,6 +38,7 @@ public class MonsterMove : MonoBehaviour
         player = targetPlayer;
         mainCamera = Camera.main;
 
+        // 스폰 시점의 플레이어 위치를 기준으로 이동 방향 결정
         if (player.position.x > transform.position.x)
         {
             moveDirection = 1;
@@ -69,6 +70,7 @@ public class MonsterMove : MonoBehaviour
             return;
         }
 
+        // 카메라 밖으로 멀어진 몬스터는 제거해서 불필요한 오브젝트를 줄임
         float distanceFromCamera = Mathf.Abs(transform.position.x - mainCamera.transform.position.x);
 
         if (distanceFromCamera > destroyDistance)
@@ -79,15 +81,18 @@ public class MonsterMove : MonoBehaviour
 
     private void NormalMove()
     {
+        // 일반 몬스터는 정해진 방향으로 직선 이동
         rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
     }
+
     private void FrogMove()
     {
         jumpTimer += Time.fixedDeltaTime;
 
-        // 공중이든 바닥이든 x축으로는 계속 이동
+        // 개구리는 이동 방향으로 계속 전진
         rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
 
+        // 바닥에 있을 때 일정 간격마다 점프
         if (isGrounded == true && jumpTimer >= frogJumpInterval)
         {
             rb.linearVelocity = new Vector2(moveDirection * speed, frogJumpPower);
@@ -100,6 +105,7 @@ public class MonsterMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // 바닥에 닿으면 착지 처리
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = true;

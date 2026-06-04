@@ -2,17 +2,18 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+// 아이템, 블록, 골인 지점 같은 오브젝트 처리를 담당
 public class ObjectManager : MonoBehaviour
 {
     public GameObject heartItemPrefab;
-    
-    // key 오브젝트 설정
-    public void HandleObject(PlayerStatus playerStaus, ObjectItem objectItem)
+
+    // Trigger 오브젝트 처리: Key, Goal
+    public void HandleObject(PlayerStatus playerStatus, ObjectItem objectItem)
     {
         switch (objectItem.objectType)
         {
             case ObjectType.Key:
-                HandleKey(playerStaus, objectItem);
+                HandleKey(playerStatus, objectItem);
                 break;
 
             case ObjectType.Goal:
@@ -20,13 +21,16 @@ public class ObjectManager : MonoBehaviour
                 break;
         }
     }
-    // 게임 종료
+
     private void HandleGoal()
     {
-        Debug.Log("게임 클리어");
+        Debug.Log("Game clear");
+
         GameResultData.CalculateScore();
         SceneManager.LoadScene("EndScene");
     }
+
+    // Collision 오브젝트 처리: Block
     public void HandleCollisionObject(PlayerStatus playerStatus, ObjectItem objectItem)
     {
         switch (objectItem.objectType)
@@ -36,14 +40,16 @@ public class ObjectManager : MonoBehaviour
                 break;
         }
     }
+
     private void HandleKey(PlayerStatus playerStatus, ObjectItem objectItem)
     {
         playerStatus.AddKey(1);
         Destroy(objectItem.gameObject);
     }
-    // block 오브젝트 설정
+
     private void HandleBlock(PlayerStatus playerStatus, ObjectItem objectItem)
     {
+        // 열쇠가 없으면 블록을 제거하지 않음
         bool usedKey = playerStatus.UseKey(1);
 
         if (usedKey == false)
@@ -55,6 +61,7 @@ public class ObjectManager : MonoBehaviour
 
         Destroy(objectItem.gameObject);
 
+        // 하트 프리팹이 있으면 잠깐 보여준 뒤 회복, 없으면 바로 회복
         if (heartItemPrefab != null)
         {
             StartCoroutine(SpawnHeartAndHeal(playerStatus, spawnPosition));
@@ -75,5 +82,4 @@ public class ObjectManager : MonoBehaviour
 
         Destroy(heart);
     }
-
 }

@@ -2,33 +2,42 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+// 플레이어의 HP, Key, 피격/회복, 무적 시간, 애니메이션 상태를 관리
 public class PlayerStatus : MonoBehaviour
 {
+    [Header("Status")]
     public int MaxHp = 4;
     public int currentHp;
     public int keyCount = 0;
+
+    [Header("Damage Settings")]
     public float invincibleTime = 2f;
     public float damageInterval = 2f;
 
+    [Header("References")]
     public UIManager uiManager;
     public Animator animator;
 
     private bool isInvincible = false;
     private bool isHit = false;
+
+    // 착지 순간을 감지하기 위해 이전 프레임의 바닥 상태를 저장
     private bool wasGrounded = false;
     private bool isJumping = false;
 
     void Start()
     {
         currentHp = MaxHp;
+
         uiManager.UpdateKeyCount(keyCount);
         uiManager.UpdateHeart(currentHp);
     }
+
     public void SetGroundedAnimation(bool ground)
     {
         animator.SetBool("isGround", ground);
 
+        // 공중 상태였다가 바닥에 닿은 순간 점프 애니메이션 해제
         if (wasGrounded == false && ground == true)
         {
             isJumping = false;
@@ -93,6 +102,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void Damage(int damage)
     {
+        // 무적 중이면 데미지를 무시
         if (isInvincible == true)
         {
             return;
@@ -109,6 +119,7 @@ public class PlayerStatus : MonoBehaviour
 
         isHit = true;
 
+        // 피격 시 이동/점프 애니메이션을 끄고 Hit 애니메이션 실행
         animator.SetBool("isHit", true);
         animator.SetBool("isRun", false);
         animator.SetBool("isJumping", false);
@@ -145,6 +156,8 @@ public class PlayerStatus : MonoBehaviour
         isHit = false;
         animator.SetBool("isHit", false);
     }
+
+    // 몬스터와 계속 닿아있는 동안 일정 간격으로 데미지 적용
     public IEnumerator MonsterDamageCoroutine(System.Func<bool> isTouchingMonster)
     {
         while (isTouchingMonster() == true)
@@ -154,9 +167,9 @@ public class PlayerStatus : MonoBehaviour
             yield return new WaitForSeconds(damageInterval);
         }
     }
+
     public bool IsHit()
     {
         return isHit;
     }
-
 }

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// 회원가입 입력 검사와 Supabase 회원가입 요청을 담당
 public class SignUpManager : MonoBehaviour
 {
     public TMP_InputField emailInputField;
@@ -19,6 +20,7 @@ public class SignUpManager : MonoBehaviour
         string password = passwordInputField.text;
         string passwordCheck = passwordCheckInputField.text;
 
+        // 입력값 검증
         if (string.IsNullOrEmpty(email))
         {
             ShowMessage("Please enter your email.");
@@ -43,6 +45,7 @@ public class SignUpManager : MonoBehaviour
             return;
         }
 
+        // SupabaseManager가 없으면 회원가입 요청 불가
         if (SupabaseManager.Instance == null)
         {
             ShowMessage("Supabase is not ready.");
@@ -52,6 +55,7 @@ public class SignUpManager : MonoBehaviour
 
         messageText.text = "Signing up...";
 
+        // Supabase Auth 회원가입 요청
         bool result = await SupabaseManager.Instance.SignUp(email, password);
 
         if (result == false)
@@ -73,6 +77,7 @@ public class SignUpManager : MonoBehaviour
     {
         messageText.text = message;
 
+        // 이전 메시지 삭제 코루틴이 있으면 중지해서 새 메시지가 바로 사라지는 것을 방지
         if (messageCoroutine != null)
         {
             StopCoroutine(messageCoroutine);

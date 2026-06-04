@@ -2,13 +2,14 @@ using System.Threading.Tasks;
 using Supabase;
 using UnityEngine;
 
+// Supabase 연결, Auth, 점수 저장/랭킹 조회를 담당
 public class SupabaseManager : MonoBehaviour
 {
     public static SupabaseManager Instance;
 
     [Header("Supabase Settings")]
-    [SerializeField] private string supabaseUrl = "YOUR_SUPABASE_URL";
-    [SerializeField] private string supabaseKey = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+    [SerializeField] private string supabaseUrl = "https://cyhjrsojzrwynrwdscat.supabase.co";
+    [SerializeField] private string supabaseKey = "sb_publishable_9qpvAn2AslBcilDoHTD92A_QvHT4UKk";
 
     public Client Client { get; private set; }
 
@@ -17,6 +18,7 @@ public class SupabaseManager : MonoBehaviour
 
     private async void Awake()
     {
+        // 씬 이동 시 중복 생성 방지
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -46,7 +48,7 @@ public class SupabaseManager : MonoBehaviour
     {
         try
         {
-            var session = await Client.Auth.SignUp(email, password);
+            await Client.Auth.SignUp(email, password);
 
             Debug.Log("Sign up request completed.");
             return true;
@@ -70,6 +72,7 @@ public class SupabaseManager : MonoBehaviour
                 return false;
             }
 
+            // 점수 저장에 사용할 로그인 유저 정보 저장
             CurrentUserEmail = session.User.Email;
             CurrentUserId = session.User.Id;
 
@@ -86,6 +89,7 @@ public class SupabaseManager : MonoBehaviour
     public void Logout()
     {
         Client.Auth.SignOut();
+
         CurrentUserEmail = null;
         CurrentUserId = null;
     }
@@ -106,6 +110,7 @@ public class SupabaseManager : MonoBehaviour
                 return false;
             }
 
+            // scores 테이블에 저장할 데이터 생성
             ScoreRecord scoreRecord = new ScoreRecord
             {
                 UserId = CurrentUserId,
@@ -135,6 +140,7 @@ public class SupabaseManager : MonoBehaviour
 
             int higherScoreCount = 0;
 
+            // 내 점수보다 높은 기록 개수로 랭킹 계산
             foreach (ScoreRecord record in scores)
             {
                 if (record.Score > myScore)

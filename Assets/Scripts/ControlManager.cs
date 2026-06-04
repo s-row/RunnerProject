@@ -3,13 +3,13 @@ using UnityEngine;
 // 모바일 버튼 입력을 받아 플레이어 이동과 점프를 처리
 public class ControlManager : MonoBehaviour
 {
-    public Transform player;
+
     public Rigidbody2D playerRb;
     public PlayerControl pct;
     public SpriteRenderer playerSpriteRenderer;
 
-    public float speed = 1.5f;
-    public float jump = 2;
+    [SerializeField] private float speed = 1.5f;
+    [SerializeField] private float jump = 2;
 
     // 0 = 정지, 1 = 오른쪽, -1 = 왼쪽
     private int playerDefaultMove = 0;
@@ -38,7 +38,7 @@ public class ControlManager : MonoBehaviour
         playerSpriteRenderer.flipX = true;
     }
 
-    public void OnReleaseMovebutton()
+    public void OnReleaseMoveButton()
     {
         playerDefaultMove = 0;
     }

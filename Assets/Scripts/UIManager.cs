@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
 
     public Sprite fullHeart;
     public Sprite emptyHeart;
-
     public TMP_Text keyText;
 
     public void UpdateHeart(int hp)

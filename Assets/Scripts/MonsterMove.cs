@@ -10,8 +10,8 @@ public enum MonsterType
 // 몬스터 타입에 따라 일반 이동 또는 개구리 점프 이동을 처리
 public class MonsterMove : MonoBehaviour
 {
-    public float speed = 2f;
-    public float destroyDistance = 15f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float destroyDistance = 15f;
     public MonsterType monsterType;
 
     [Header("Frog Monster")]

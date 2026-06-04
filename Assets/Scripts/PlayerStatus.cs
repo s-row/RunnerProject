@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerStatus : MonoBehaviour
 {
     [Header("Status")]
-    public int MaxHp = 4;
+    public int maxHp = 4;
     public int currentHp;
     public int keyCount = 0;
 
@@ -23,11 +23,11 @@ public class PlayerStatus : MonoBehaviour
 
     // 착지 순간을 감지하기 위해 이전 프레임의 바닥 상태를 저장
     private bool wasGrounded = false;
-    private bool isJumping = false;
+
 
     void Start()
     {
-        currentHp = MaxHp;
+        currentHp = maxHp;
 
         uiManager.UpdateKeyCount(keyCount);
         uiManager.UpdateHeart(currentHp);
@@ -40,7 +40,7 @@ public class PlayerStatus : MonoBehaviour
         // 공중 상태였다가 바닥에 닿은 순간 점프 애니메이션 해제
         if (wasGrounded == false && ground == true)
         {
-            isJumping = false;
+
             animator.SetBool("isJumping", false);
         }
 
@@ -49,7 +49,6 @@ public class PlayerStatus : MonoBehaviour
 
     public void StartJumpAnimation()
     {
-        isJumping = true;
         animator.SetBool("isJumping", true);
     }
 
@@ -83,16 +82,16 @@ public class PlayerStatus : MonoBehaviour
 
     public void Heal(int amount)
     {
-        if (currentHp >= MaxHp)
+        if (currentHp >= maxHp)
         {
             return;
         }
 
         currentHp += amount;
 
-        if (currentHp > MaxHp)
+        if (currentHp > maxHp)
         {
-            currentHp = MaxHp;
+            currentHp = maxHp;
         }
 
         uiManager.UpdateHeart(currentHp);

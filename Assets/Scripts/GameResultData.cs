@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameResultData
+public static class GameResultData
 {
     public static int hitCount = 0;
     public static int finalScore = 0;

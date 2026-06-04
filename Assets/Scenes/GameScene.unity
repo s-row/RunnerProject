@@ -23822,7 +23822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1586bd7032f264c82e29ed6eb23fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControll
-  player: {fileID: 1224462695}
   playerRb: {fileID: 1224462690}
   pct: {fileID: 1224462698}
   playerSpriteRenderer: {fileID: 1224462694}
@@ -24302,7 +24301,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 369589870}
           m_TargetAssemblyTypeName: ControlManager, Assembly-CSharp
-          m_MethodName: OnReleaseMovebutton
+          m_MethodName: OnReleaseMoveButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -24644,7 +24643,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 369589870}
           m_TargetAssemblyTypeName: ControlManager, Assembly-CSharp
-          m_MethodName: OnReleaseMovebutton
+          m_MethodName: OnReleaseMoveButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -26614,7 +26613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08b0110f08d07746be748f155191ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
-  MaxHp: 4
+  maxHp: 4
   currentHp: 0
   keyCount: 0
   invincibleTime: 2
